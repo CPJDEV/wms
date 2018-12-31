@@ -1,0 +1,51 @@
+{% import "bootstrap/utils.html" as utils %}
+{% extends "base.html" %}
+{% block title %}Warehouses{% endblock %}
+{% block body %}
+
+{% if 'view_warehouse_sec' in secs %}
+{{ utils.flashed_messages() }}
+<div class="content-section">  
+        <h3 style="text-align:left; margin-left: 20px;"> Live view ({{ warehouse.name }}) <a href="{{ url_for('admin.list_warehouses')}}" class="btn btn-info"> <i class="fa fa-backward"></i>&nbsp; Back to Warehouses </a> &nbsp;&nbsp;&nbsp;<span class="max_imize" title="Toggle Fullscreen mode"><i class="fa fa-expand-arrows-alt"></i> </span></h3>
+
+	<div class="view_wh">
+		{% if warehouse.bins.count() > 0 %}
+			<div class="inner_wh">
+				{% for aisle in warehouse.aisles %}
+					<div id="{{ aisle.name }}" class="aisle">
+						<h3>{{ aisle.name }}</h3>
+						<ul class="shelf left">
+							{% for bin in aisle.bins %}
+								{% set bin_eo = bin.name[:4]|int %}
+
+								{% if bin_eo % 2 == 0 %}
+									<li id="{{ bin.name }}" class="{{ 'active' if bin.active else 'inactive' }}">{{ bin.name }}</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+						<ul class="shelf right">
+							{% for bin in aisle.bins %}
+								{% set bin_eo = bin.name[:4]|int %}
+
+								{% if bin_eo % 2 == 1 %}
+									<li id="{{ bin.name }}" class="{{ 'active' if bin.active else 'inactive' }}">{{ bin.name }}</li>
+								{% endif %}
+							{% endfor %}
+						</ul>
+
+					</div>
+				{%endfor%}
+			</div>
+		{% else %}
+			<div class="note">
+				<h3> No configuration found for this warehouse.</h3>
+			</div>
+		{%endif%}
+	</div>
+</div>
+{% else %}
+        <h3 style="text-align:center;"> You do not have access to this view </h3>
+{% endif %}
+    <script language="javascript" src="{{ url_for('static', filename='src/wh_func.js') }}" > </script>
+
+{% endblock %} 

@@ -1,0 +1,47 @@
+.view_wh {
+	position: absolute;
+	width: 98%;
+	height: 85%;
+	margin-left: 1%;
+	color: #39f50d;
+	background: #000;
+	overflow: hidden;
+}
+
+.inner_wh {
+	height: 96%;
+	overflow: auto;
+	margin-bottom: 6%;
+}
+
+.aisle {
+	display: inline-block;
+	
+}
+
+.aisle .shelf {
+	display: inline-block;
+	list-style-type: none;
+	font-size: 10px;
+}
+
+.aisle h3 {
+	text-align: center;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.max_imize {
+	font-size: 18px;
+	color: #999;
+}
+
+.max_imize:hover {
+	color: #000;
+}
