@@ -6,35 +6,63 @@
 {% if 'view_warehouse_sec' in secs %}
 {{ utils.flashed_messages() }}
 <div class="content-section">  
-        <h3 style="text-align:left; margin-left: 20px;"> Live view ({{ warehouse.name }}) <a href="{{ url_for('admin.list_warehouses')}}" class="btn btn-info"> <i class="fa fa-backward"></i>&nbsp; Back to Warehouses </a> &nbsp;&nbsp;&nbsp;<span class="max_imize" title="Toggle Fullscreen mode"><i class="fa fa-expand-arrows-alt"></i> </span></h3>
+        <h3 style="text-align:left; margin-left: 20px;"> Live view ({{ warehouse.name }}) <a href="{{ url_for('admin.list_warehouses')}}" class="btn btn-info"> <i class="fa fa-backward"></i>&nbsp; Back to Warehouses </a> &nbsp;&nbsp;&nbsp;<span class="max_imize" title="Toggle Fullscreen mode"><i class="fa fa-expand-arrows-alt"></i> </span>  &nbsp;&nbsp;&nbsp;</h3>
 
 	<div class="view_wh">
+		<span class="min_imize" title="Escape Fullscreen mode"><i class="fas fa-times"></i> </span>
+
 		{% if warehouse.bins.count() > 0 %}
 			<div class="inner_wh">
-				{% for aisle in warehouse.aisles %}
-					<div id="{{ aisle.name }}" class="aisle">
-						<h3>{{ aisle.name }}</h3>
-						<ul class="shelf left">
-							{% for bin in aisle.bins %}
-								{% set bin_eo = bin.name[:4]|int %}
+				<div class="flat_view">
+					
+					{% for aisle in warehouse.aisles %}
+						<div id="{{ aisle.name }}" class="aisle">
+							<h3>{{ aisle.name }}</h3>
+							
+								<ul class="shelf left">
+									{% for head in aisle_cols[aisle.name]  %}
+										{% if head % 2 == 0 %}
+										<li class="col_head" id="{{ head }}">{{ head }}
 
-								{% if bin_eo % 2 == 0 %}
-									<li id="{{ bin.name }}" class="{{ 'active' if bin.active else 'inactive' }}">{{ bin.name }}</li>
-								{% endif %}
-							{% endfor %}
-						</ul>
-						<ul class="shelf right">
-							{% for bin in aisle.bins %}
-								{% set bin_eo = bin.name[:4]|int %}
+											<ul class="col_bins" id="{{ head }}">
+												{% for bin in aisle.bins %}
+													{% if bin.name[:4]|int == head %}
+														<li class="bin" id="{{ bin.name }}">{{ bin.name }} </li>
+													{% endif %}
+												{% endfor %}
+											</ul>
+										</li>
+										{% endif %}
+									{%endfor%}
+								</ul>
+								<ul class="shelf right">
+									{% for head in aisle_cols[aisle.name]  %}
+										{% if head % 2 == 1 %}
+										<li class="col_head" id="{{ head }}">{{ head }}
+											<ul class="col_bins" id="{{ head }}">
+												{% for bin in aisle.bins %}
+													{% if bin.name[:4]|int == head %}
+														<li class="bin" id="{{ bin.name }}">{{ bin.name }} </li>
+													{% endif %}
+												{% endfor %}
+											</ul>
+										</li>
+										{% endif %}
+									{%endfor%}
+								</ul>
 
-								{% if bin_eo % 2 == 1 %}
-									<li id="{{ bin.name }}" class="{{ 'active' if bin.active else 'inactive' }}">{{ bin.name }}</li>
-								{% endif %}
-							{% endfor %}
-						</ul>
 
+						</div>
+					{%endfor%}
+				</div>
+				<div class="threed_view">
+					<div id="view_port">
+						<div class="cube">
+							
+						</div>
 					</div>
-				{%endfor%}
+					
+				</div>
 			</div>
 		{% else %}
 			<div class="note">
@@ -46,6 +74,7 @@
 {% else %}
         <h3 style="text-align:center;"> You do not have access to this view </h3>
 {% endif %}
+    <script language="javascript" src="{{ url_for('static', filename='src/prefix-free.js') }}" > </script>
     <script language="javascript" src="{{ url_for('static', filename='src/wh_func.js') }}" > </script>
 
 {% endblock %} 

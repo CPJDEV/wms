@@ -938,8 +938,18 @@ def view_warehouse(id_):
 
     user_sections = fetch_sections() 
     warehouse = Warehouse.query.get_or_404(id_)
-   
-    return render_template('admin/warehouses/view.html',warehouse=warehouse, title="warehouse | View",secs=user_sections)
+    col_heads = {}
+ 
+    for aisle in warehouse.aisles:
+        col_heads[aisle.name] = []
+        for bin_ in aisle.bins:
+            bin_eo = int(bin_.name[:4])
+           
+            if bin_eo not in col_heads[aisle.name]:
+                col_heads[aisle.name].append(bin_eo)
+            
+
+    return render_template('admin/warehouses/view.html',warehouse=warehouse,aisle_cols=col_heads, title="warehouse | View",secs=user_sections)
 
 @admin.route('/warehouses', methods=['GET', 'POST'])
 @login_required

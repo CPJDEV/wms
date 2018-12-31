@@ -1,22 +1,47 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
 .view_wh {
-	position: absolute;
+	position: relative;
 	width: 98%;
-	height: 85%;
-	margin-left: 1%;
+	min-height: 500px;
+	left: 1%;
 	color: #39f50d;
 	background: #000;
 	overflow: hidden;
 }
 
 .inner_wh {
-	height: 96%;
+	height: 100%;
 	overflow: auto;
 	margin-bottom: 6%;
+
+  font: 12px/1.2 Arial;
+  perspective: 600px;
+  perspective: 600px;
+  background: #666;
+  background: linear-gradient(#222,#222,#444);
+  /*color: #fff;*/
+  text-align:center;
+}
+
+.flat_view {
+  height: 98%;
+  overflow: auto;
+  padding-bottom: 5%;
+}
+
+.threed_view {
+	display: none;
 }
 
 .aisle {
 	display: inline-block;
-	
+  margin-top: 10px;
+  margin-left: 5px;
+  text-align: center;
+  box-shadow: 0px 0px 3px #999;
 }
 
 .aisle .shelf {
@@ -31,10 +56,12 @@
 
 .left {
 	float: left;
+  margin-left: -5%;
 }
 
 .right {
 	float: right;
+  margin-right: 10%;
 }
 
 .max_imize {
@@ -44,4 +71,57 @@
 
 .max_imize:hover {
 	color: #000;
+}
+
+.col_head {
+  cursor: pointer;
+  padding: 1px 16px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 3px #fff;
+}
+
+.col_head:hover {
+  background: #999;
+  color: #fce;
+}
+
+
+.min_imize {
+	display: none;
+    position: absolute;
+    font-size: 18px;
+    color: #999;
+    top: 1%;
+    right: 1%;
+    z-index: inherit;
+}
+
+.min_imize:hover {
+	color: #fff;
+}
+
+.col_bins {
+  display: none;
+}
+
+.threedee {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+/*.assembly {
+  animation: spin 4s linear infinite;
+}*/
+#box-toggle:checked ~ .assembly .face {
+  box-shadow: inset 0 0 0 1px #0f0;
+  mask-image: none !important;
+  backface-visibility: visible;
+}
+
+@keyframes spin {
+  to {
+    transform: rotateY(360deg) rotateZ(360deg) rotateX(720deg);
+  }
 }

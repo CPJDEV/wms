@@ -17,10 +17,9 @@ a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:h
 }
 
 footer {
-    position: fixed;
     width: 100%;
-    background-color: #f8f8f8;
-    bottom: 0;
+    background: transparent;
+    padding: 1%;
     text-align: center;
 }
 
