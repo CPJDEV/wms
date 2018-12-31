@@ -22,7 +22,6 @@
   perspective: 600px;
   background: #666;
   background: linear-gradient(#222,#222,#444);
-  /*color: #fff;*/
   text-align:center;
 }
 
@@ -48,6 +47,7 @@
 	display: inline-block;
 	list-style-type: none;
 	font-size: 10px;
+  padding: 0;
 }
 
 .aisle h3 {
@@ -56,7 +56,7 @@
 
 .left {
 	float: left;
-  margin-left: -5%;
+  margin-left: 10%;
 }
 
 .right {
@@ -73,22 +73,9 @@
 	color: #000;
 }
 
-.col_head {
-  cursor: pointer;
-  padding: 1px 16px;
-  border-radius: 3px;
-  box-shadow: 0px 0px 3px #fff;
-}
-
-.col_head:hover {
-  background: #999;
-  color: #fce;
-}
-
-
 .min_imize {
-	display: none;
     position: absolute;
+    display: none;
     font-size: 18px;
     color: #999;
     top: 1%;
@@ -97,11 +84,40 @@
 }
 
 .min_imize:hover {
-	color: #fff;
+  color: #fff;
+}
+
+.col_head {
+  cursor: pointer;
+  border-radius: 3px;
+  /*margin-bottom: 10px;*/
+  box-shadow: 0px 0px 3px #fff;
 }
 
 .col_bins {
-  display: none;
+  padding-right: 5px;
+  background: #000;
+
+  /*border: 1px dashed #fff;*/
+  list-style-type: none;
+  box-shadow: 0px 0px 3px #fc3;
+
+}
+
+.col_bins .bin {
+  visibility: hidden;
+}
+
+.col_head:hover {
+  background: #fc3;
+  color:#000;
+}
+
+.col_head:hover .col_bins .bin {
+  visibility: visible;
+  width:100%;
+  color: #39f50d;
+
 }
 
 .threedee {
